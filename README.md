@@ -1,0 +1,3 @@
+# Discovery
+
+Discovers SSDP services

@@ -25,10 +25,7 @@ class WindowController: NSWindowController {
         return viewController
     }()
     
-    lazy private var servicesArrayController: NSArrayController = {
-        let controller = self.listViewController.servicesArrayController
-        return controller
-    }()
+    lazy private var servicesArrayController: NSArrayController = listViewController.servicesArrayController
     
     @IBOutlet private weak var reloadButton: NSButton!
 

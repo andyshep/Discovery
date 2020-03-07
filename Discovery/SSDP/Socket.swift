@@ -137,6 +137,20 @@ extension Socket {
     }
 }
 
+enum SocketAddressConfig: UInt8 {
+    case ipv4
+    case ipv6
+    
+    var rawValue: UInt8 {
+        switch self {
+        case .ipv4:
+            return UInt8(AF_INET)
+        case .ipv6:
+            return UInt8(AF_INET6)
+        }
+    }
+}
+
 enum SocketDomain: Int32 {
     case local
     case inet
@@ -254,7 +268,7 @@ struct SocketConfiguration {
     
     init?(address: String, port: Int) {
         var addr = sockaddr_in()
-        addr.sin_family = 2 // AF_INET
+        addr.sin_family = SocketAddressConfig.ipv4.rawValue
         addr.sin_port = htons(1900)
         
         var addressPtr = address.toUnsafeMutablePointer()
@@ -303,6 +317,7 @@ private extension String {
         let stream = OutputStream(toBuffer: buffer, capacity: data.count)
         stream.open()
         defer { stream.close() }
+        
         let value = data.withUnsafeBytes { $0.baseAddress?.assumingMemoryBound(to: UInt8.self) }
         guard let val = value else { return nil }
         stream.write(val, maxLength: data.count)

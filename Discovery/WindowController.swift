@@ -11,7 +11,15 @@ import Combine
 
 class WindowController: NSWindowController {
     
+    @IBOutlet private weak var reloadButton: NSButton!
+    @IBOutlet private weak var broadcastButton: NSButton!
+    
     private var cancellables: [AnyCancellable] = []
+    
+    private lazy var ssdpManager: SSDPManager = {
+        guard let manager = SSDPManager() else { fatalError() }
+        return manager
+    }()
     
     lazy private var listViewController: ListViewController = {
         guard let splitViewController = contentViewController as? NSSplitViewController else { fatalError() }
@@ -26,8 +34,6 @@ class WindowController: NSWindowController {
     }()
     
     lazy private var servicesArrayController: NSArrayController = listViewController.servicesArrayController
-    
-    @IBOutlet private weak var reloadButton: NSButton!
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -45,6 +51,12 @@ class WindowController: NSWindowController {
                 self?.detailViewController.representedObject = service.payload
             }
             .store(in: &cancellables)
+        
+        broadcastButton
+            .publisher
+            .receive(subscriber: ssdpManager.broadcastEventTrigger)
+        
+        listViewController.representedObject = ssdpManager
     }
 
 }

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		F728747B240DEBD80077A292 /* NSViewController+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728747A240DEBD80077A292 /* NSViewController+Combine.swift */; };
 		F728747D240F2BBF0077A292 /* NSArrayController+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */; };
+		F7D5C8732413FD5600741CA3 /* Socket+SSDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */; };
+		F7D5C875241406B600741CA3 /* NSButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C874241406B600741CA3 /* NSButton+Combine.swift */; };
+		F7D5C8772414277100741CA3 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */; };
+		F7D5C87924146BDB00741CA3 /* NSTextView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */; };
+		F7D5C87B24146EC900741CA3 /* NSAttributedString+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */; };
 		F7FCDE7D240C86420062E080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE7C240C86420062E080 /* AppDelegate.swift */; };
 		F7FCDE7F240C86420062E080 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE7E240C86420062E080 /* ListViewController.swift */; };
 		F7FCDE81240C86440062E080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7FCDE80240C86440062E080 /* Assets.xcassets */; };
@@ -23,6 +28,11 @@
 /* Begin PBXFileReference section */
 		F728747A240DEBD80077A292 /* NSViewController+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Combine.swift"; sourceTree = "<group>"; };
 		F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSArrayController+Combine.swift"; sourceTree = "<group>"; };
+		F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Socket+SSDP.swift"; sourceTree = "<group>"; };
+		F7D5C874241406B600741CA3 /* NSButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSButton+Combine.swift"; sourceTree = "<group>"; };
+		F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
+		F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+Combine.swift"; sourceTree = "<group>"; };
+		F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Links.swift"; sourceTree = "<group>"; };
 		F7FCDE79240C86420062E080 /* Discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FCDE7C240C86420062E080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7FCDE7E240C86420062E080 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +63,10 @@
 			children = (
 				F728747A240DEBD80077A292 /* NSViewController+Combine.swift */,
 				F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */,
+				F7D5C874241406B600741CA3 /* NSButton+Combine.swift */,
+				F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */,
+				F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */,
+				F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -62,6 +76,7 @@
 			children = (
 				F7FCDE91240C88BF0062E080 /* SSDPManager.swift */,
 				F7FCDE90240C88BF0062E080 /* SSDPParser.swift */,
+				F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */,
 				F7FCDE92240C88BF0062E080 /* Socket.swift */,
 			);
 			path = SSDP;
@@ -174,11 +189,16 @@
 				F728747B240DEBD80077A292 /* NSViewController+Combine.swift in Sources */,
 				F7FCDE95240C88BF0062E080 /* Socket.swift in Sources */,
 				F7FCDE94240C88BF0062E080 /* SSDPManager.swift in Sources */,
+				F7D5C875241406B600741CA3 /* NSButton+Combine.swift in Sources */,
 				F7FCDE7F240C86420062E080 /* ListViewController.swift in Sources */,
 				F7FCDE8D240C86D90062E080 /* WindowController.swift in Sources */,
+				F7D5C87B24146EC900741CA3 /* NSAttributedString+Links.swift in Sources */,
 				F7FCDE7D240C86420062E080 /* AppDelegate.swift in Sources */,
+				F7D5C87924146BDB00741CA3 /* NSTextView+Combine.swift in Sources */,
 				F728747D240F2BBF0077A292 /* NSArrayController+Combine.swift in Sources */,
 				F7FCDE8F240C880C0062E080 /* DetailViewController.swift in Sources */,
+				F7D5C8772414277100741CA3 /* Publisher+Extensions.swift in Sources */,
+				F7D5C8732413FD5600741CA3 /* Socket+SSDP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

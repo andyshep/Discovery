@@ -15,25 +15,43 @@ final class SSDPManager {
         case retainFailed
     }
     
-    private var broadcastPayload: String {
-        return "M-SEARCH * HTTP/1.1\r\nHOST:\(broadcastAddress):1900\r\nMAN:\"ssdp:discover\"\r\nST:ssdp:all\r\nMX:1\r\n\r\n"
+    /// Emits with new SSDP data received from the socket
+    var listenerSocketSubject: AnyPublisher<Result<Data, Error>, Never> {
+        return _listenerSocketSubject
+            .handleEvents(
+                receiveSubscription: { [unowned self] _ in
+                    self.startListening()
+                }
+            )
+            .print()
+            .eraseToAnyPublisher()
     }
+    private let _listenerSocketSubject = PassthroughSubject<Result<Data, Error>, Never>()
     
-    private var broadcastAddress: String {
-        return "239.255.255.250"
+    /// To be triggered when an SSDP broadcast should be sent
+    var broadcastEventTrigger: AnySubscriber<Void, Never> {
+        return AnySubscriber(_broadcastEventTrigger)
     }
+    private let _broadcastEventTrigger = PassthroughSubject<Void, Never>()
+    
+    private lazy var startListening: () -> Void = {
+        listenerQueue.async { [weak self] in
+            self?.listenerSocket.receive { result in
+                DispatchQueue.main.async {
+                    self?._listenerSocketSubject.send(result)
+                }
+            }
+        }
+        return { }
+    }()
+    
+    private var cancellables: [AnyCancellable] = []
     
     private var broadcastSocket: Socket
     private var listenerSocket: Socket
     
     private let broadcastQueue = DispatchQueue.init(label: "broadcast-queue")
     private let listenerQueue = DispatchQueue.init(label: "listening-queue")
-    
-    var listenerSocketSubject: AnyPublisher<Result<Data, Error>, Never> {
-        return _listenerSocketSubject.eraseToAnyPublisher()
-    }
-    
-    private let _listenerSocketSubject = PassthroughSubject<Result<Data, Error>, Never>()
     
     init?() {
         guard let broadcast = Socket(domain: .inet, type: .dgram, protocol: .udp) else { return nil }
@@ -45,6 +63,13 @@ final class SSDPManager {
         guard let _ = try? configureAsListener(socket: listener) else { return nil }
         
         self.listenerSocket = listener
+        
+        _broadcastEventTrigger
+            .eraseToAnyPublisher()
+            .flatMapLatest { [unowned self] _ in
+                self.sendBroadcast().replaceError(with: ())
+            }
+            .subscribe(andStoreIn: &cancellables)
     }
     
     deinit {
@@ -52,7 +77,7 @@ final class SSDPManager {
         listenerSocket.forceClose()
     }
     
-    func sendBroadcast() -> Future<Void, Error> {
+    private func sendBroadcast() -> Future<Void, Error> {
         return Future<Void, Error> { [weak self] promise in
             guard let this = self else {
                 return promise(.failure(SSDPManagerError.retainFailed))
@@ -60,11 +85,7 @@ final class SSDPManager {
             
             this.broadcastQueue.async {
                 do {
-                    try this.broadcastSocket.send(
-                        message: this.broadcastPayload,
-                        address: this.broadcastAddress,
-                        port: 1900
-                    )
+                    try this.broadcastSocket.sendBroadcast()
                     
                     DispatchQueue.main.async {
                         promise(.success(()))
@@ -73,17 +94,6 @@ final class SSDPManager {
                     DispatchQueue.main.async {
                         promise(.failure(error))
                     }
-                }
-            }
-        }
-    }
-    
-    func startListening() {
-        listenerQueue.async { [weak self] in
-            guard let this = self else { return }
-            self?.listenerSocket.receive(address: this.broadcastAddress, port: 1900) { result in
-                DispatchQueue.main.async {
-                    self?._listenerSocketSubject.send(result)
                 }
             }
         }

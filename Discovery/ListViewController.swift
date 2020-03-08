@@ -15,14 +15,11 @@ class ListViewController: NSViewController {
     
     @objc private var services: [SSDPServiceWrapper] = []
     
-    private let ssdpManager = SSDPManager()
     private var cancellables: [AnyCancellable] = []
     
     lazy var servicesArrayController: NSArrayController = {
         let controller = NSArrayController()
         controller.bind(.contentArray, to: self, withKeyPath: "services")
-//        controller.preservesSelection = true
-//        controller.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         return controller
     }()
@@ -32,22 +29,23 @@ class ListViewController: NSViewController {
 
         tableView.bind(.content, to: servicesArrayController, withKeyPath: "arrangedObjects")
         tableView.bind(.selectionIndexes, to: servicesArrayController, withKeyPath: "selectionIndexes")
-        
-        bind(to: ssdpManager)
-        
-        ssdpManager?.startListening()
     }
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            guard let ssdpManager = representedObject as? SSDPManager else { return }
+            
+            cancellables.forEach { $0.cancel() }
+            cancellables = []
+            
+            bind(to: ssdpManager)
         }
     }
 }
 
 private extension ListViewController {
-    private func bind(to ssdpManager: SSDPManager?) {
-        ssdpManager?.listenerSocketSubject
+    private func bind(to ssdpManager: SSDPManager) {
+        ssdpManager.listenerSocketSubject
             .sink(receiveValue: { [weak self] (result) in
                 guard let this = self else { return }
                 

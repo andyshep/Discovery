@@ -7,11 +7,12 @@
 //
 
 import Foundation
-import Darwin
+import Darwin.POSIX.stdio
+import Darwin.POSIX.sys.socket
 
 struct Socket {
 
-    private let descriptor: Int32
+    internal let descriptor: Int32
     
     init(descriptor: Int32) {
         self.descriptor = descriptor
@@ -25,78 +26,8 @@ struct Socket {
 }
 
 extension Socket {
-    func send(message: String, address: String, port: Int) throws {
-        var config = SocketConfiguration.makeBroadcast(
-            address: address,
-            port: port
-        )
-        
-        try message.withCString { messagePtr -> Void in
-            try send(
-                buffer: messagePtr,
-                destination: config.addressPtr,
-                length: socklen_t(MemoryLayout<sockaddr>.size)
-            )
-        }
-    }
     
-    func receive(address: String, port: Int, dataReceived callback: (Result<Data, Error>) -> Void) {
-        var config = SocketConfiguration.makeReceive(
-            address: address,
-            port: port
-        )
-        
-        do {
-            try bind(
-                address: config.addressPtr,
-                length: socklen_t(MemoryLayout<sockaddr>.size)
-            )
-        } catch {
-            callback(.failure(error))
-        }
-        
-        var mreq = ip_mreq()
-        mreq.imr_multiaddr.s_addr = inet_addr(address)
-        mreq.imr_interface.s_addr = htonl(INADDR_ANY)
-        
-        do {
-            try setOption(
-                level: .protocolIP,
-                name: .addMembership,
-                value: &mreq,
-                length: socklen_t(MemoryLayout<ip_mreq>.size)
-            )
-        } catch {
-            callback(.failure(error))
-        }
-        
-        let count = 512
-        let bufferPtr = UnsafeMutableRawPointer.allocate(
-            byteCount: count, alignment:
-            MemoryLayout<Int8>.alignment
-        )
-        defer { free(bufferPtr) }
-        
-        while true {
-            bufferPtr.initializeMemory(as: Int8.self, repeating: 0, count: count)
-            var addrlen = UInt32(MemoryLayout<sockaddr_in>.size)
-            
-            // try to receive data from socket
-            guard Darwin.recvfrom(descriptor, bufferPtr, count, 0, config.addressPtr, &addrlen) > 0 else {
-                return callback(.failure(SocketError.receiveFailed(code: errno)))
-            }
-            
-            // convert buffer into data
-            let data = Data(bytes: bufferPtr, count: count)
-            callback(.success(data))
-        }
-    }
-    
-    private func bind(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
-        guard Darwin.bind(descriptor, address, length) == 0 else {
-            throw SocketError.bindFailed(code: errno)
-        }
-    }
+    // MARK: Public
     
     func setOption(level: SocketOptionLevel, name: SocketOption, value: UnsafeRawPointer, length: socklen_t) throws {
         guard Darwin.setsockopt(descriptor, level.rawValue, name.rawValue, value, length) == 0 else {
@@ -114,21 +45,27 @@ extension Socket {
         guard let _ = try? close() else { return }
     }
     
-    // MARK: Private
+    // MARK: Internal
     
-    private func connect(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
+    internal func bind(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
+        guard Darwin.bind(descriptor, address, length) == 0 else {
+            throw SocketError.bindFailed(code: errno)
+        }
+    }
+    
+    internal func connect(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
         guard Darwin.connect(descriptor, address, length) != -1 else {
             throw SocketError.connectFailed(code: errno)
         }
     }
     
-    private func send(buffer: UnsafeBufferPointer<UInt8>, flags: Int32 = 0) throws {
+    internal func send(buffer: UnsafeBufferPointer<UInt8>, flags: Int32 = 0) throws {
         guard Darwin.send(descriptor, buffer.baseAddress, buffer.count, flags) != -1 else {
             throw SocketError.sendFailed(code: errno)
         }
     }
     
-    private func send(buffer: UnsafeRawPointer, flags: Int32 = 0, destination: UnsafePointer<sockaddr>, length: socklen_t) throws {
+    internal func send(buffer: UnsafeRawPointer, flags: Int32 = 0, destination: UnsafePointer<sockaddr>, length: socklen_t) throws {
         let bufferCount = Int(strlen(buffer.assumingMemoryBound(to: Int8.self)) + 1)
         let result = Darwin.sendto(descriptor, buffer, bufferCount, flags, destination, length)
         guard result >= 0 else {
@@ -269,7 +206,7 @@ struct SocketConfiguration {
     init?(address: String, port: Int) {
         var addr = sockaddr_in()
         addr.sin_family = SocketAddressConfig.ipv4.rawValue
-        addr.sin_port = htons(1900)
+        addr.sin_port = htons(UInt16(port))
         
         var addressPtr = address.toUnsafeMutablePointer()
         defer { free(addressPtr) }
@@ -284,30 +221,9 @@ struct SocketConfiguration {
             return ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { UnsafeMutablePointer($0) }
         }
     }()
-    
-    static func makeBroadcast(address: String = "239.255.255.250", port: Int = 1900) -> SocketConfiguration {
-        var addr = sockaddr_in()
-        addr.sin_family = 2 // AF_INET
-        addr.sin_port = htons(UInt16(port))
-        
-        Darwin.inet_pton(2, address.toUnsafeMutablePointer(), &addr.sin_addr)
-        
-        return SocketConfiguration(address: addr)
-    }
-    
-    static func makeReceive(address: String = "239.255.255.250", port: Int = 1900) -> SocketConfiguration {
-        var addr = sockaddr_in()
-        addr.sin_family = 2 // AF_INET
-        addr.sin_port = htons(1900)
-        addr.sin_addr.s_addr = htonl(INADDR_ANY)
-        
-        Darwin.inet_pton(2, address.toUnsafeMutablePointer(), &addr.sin_addr)
-        
-        return SocketConfiguration(address: addr)
-    }
 }
 
-private extension String {
+internal extension String {
     func toUnsafePointer() -> UnsafePointer<UInt8>? {
         guard let data = data(using: .utf8) else {
             return nil
@@ -330,13 +246,13 @@ private extension String {
     }
 }
 
-private func htons(_ value: UInt16) -> UInt16 {
+internal func htons(_ value: UInt16) -> UInt16 {
     // https://gist.github.com/shavit/2706028c142c953adf8b51dc5f9ba2f2
     
     return (value << 8) + (value >> 8)
 }
 
-private func htonl(_ value: UInt32) -> UInt32 {
+internal func htonl(_ value: UInt32) -> UInt32 {
     // https://stackoverflow.com/a/24395014
     
     return CFSwapInt32HostToBig(value)

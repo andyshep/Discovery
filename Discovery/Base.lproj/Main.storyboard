@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -695,20 +695,34 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="YHi-Th-Uyh"/>
                                 <toolbarItem implicitItemIdentifier="36112DEC-376F-4E91-94A1-13EFBB02A69E" label="Reload" paletteLabel="Reload" image="NSRefreshTemplate" id="oim-DZ-WcI">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="39" height="28"/>
+                                    <size key="minSize" width="38" height="28"/>
                                     <size key="maxSize" width="39" height="28"/>
                                     <button key="view" verticalHuggingPriority="750" id="owW-lQ-XZv">
                                         <rect key="frame" x="2" y="14" width="39" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AOD-np-eyG">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="B1556315-D6B9-4850-822A-CFC60DED757A" label="Broadcast" paletteLabel="Broadcast" image="broadcast2" id="NWs-RF-HQu">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="38" height="28"/>
+                                    <size key="maxSize" width="39" height="28"/>
+                                    <button key="view" verticalHuggingPriority="750" id="7HV-bD-J89">
+                                        <rect key="frame" x="11" y="14" width="39" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="broadcast2" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="20D-Gy-QRZ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="YHi-Th-Uyh"/>
+                                <toolbarItem reference="NWs-RF-HQu"/>
                                 <toolbarItem reference="oim-DZ-WcI"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -717,12 +731,14 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="broadcastButton" destination="7HV-bD-J89" id="c23-dj-vau"/>
+                        <outlet property="reloadButton" destination="owW-lQ-XZv" id="dRo-Fz-T8c"/>
                         <segue destination="JWJ-pG-Cuz" kind="relationship" relationship="window.shadowedContentViewController" id="ZLI-vj-BvA"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="60" y="313"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="EM0-go-1fT">
@@ -776,7 +792,7 @@
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="v8o-2U-qd4">
-                                                        <font key="font" metaFont="label" size="13"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -792,7 +808,7 @@
                                                                         <constraint firstAttribute="height" constant="17" id="Ivb-0e-pXd"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Qoe-80-aug">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -832,7 +848,7 @@
                                 </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pJQ-Wr-fU0">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="label" size="13"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w6q-0E-Wh5">
@@ -917,5 +933,6 @@
     </scenes>
     <resources>
         <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="broadcast2" width="12" height="12"/>
     </resources>
 </document>

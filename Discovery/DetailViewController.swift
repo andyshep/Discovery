@@ -7,20 +7,36 @@
 //
 
 import Cocoa
+import Combine
 
 class DetailViewController: NSViewController {
     
     @IBOutlet private weak var textView: NSTextView!
+    
+    private var cancellables: [AnyCancellable] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        
+        textView.clickedLinkPublisher
+            .sink { (url) in
+                NSWorkspace.shared.open(url)
+            }
+            .store(in: &cancellables)
+    }
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
     }
     
     override var representedObject: Any? {
         didSet {
             guard let payload = representedObject as? String else { return }
-            textView.string = payload
+            
+            let string = NSMutableAttributedString(string: payload)
+            string.withLinkAttributesAdded()
+            
+            textView.textStorage?.append(string)
         }
     }
 }

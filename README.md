@@ -1,10 +1,10 @@
 # Discovery
 
-Discovers SSDP services over the local network. Built using Swift and Combine. Includes a thin Swift wrapper over the POSIX sockets API.
+Discovers SSDP services over the local network. Built using SwiftUI and Combine. Includes a thin Swift wrapper over the POSIX sockets API.
 
 ## Requirements
 
-* macOS 10.15
+* macOS 11
 * Swift 5
 
 ## Installation

@@ -7,48 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F728747B240DEBD80077A292 /* NSViewController+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728747A240DEBD80077A292 /* NSViewController+Combine.swift */; };
-		F728747D240F2BBF0077A292 /* NSArrayController+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */; };
-		F7D5C8732413FD5600741CA3 /* Socket+SSDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */; };
-		F7D5C875241406B600741CA3 /* NSButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C874241406B600741CA3 /* NSButton+Combine.swift */; };
-		F7D5C8772414277100741CA3 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */; };
-		F7D5C87924146BDB00741CA3 /* NSTextView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */; };
-		F7D5C87B24146EC900741CA3 /* NSAttributedString+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */; };
-		F7FCDE7D240C86420062E080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE7C240C86420062E080 /* AppDelegate.swift */; };
-		F7FCDE7F240C86420062E080 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE7E240C86420062E080 /* ListViewController.swift */; };
-		F7FCDE81240C86440062E080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7FCDE80240C86440062E080 /* Assets.xcassets */; };
-		F7FCDE84240C86440062E080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FCDE82240C86440062E080 /* Main.storyboard */; };
-		F7FCDE8D240C86D90062E080 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE8C240C86D90062E080 /* WindowController.swift */; };
-		F7FCDE8F240C880C0062E080 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE8E240C880C0062E080 /* DetailViewController.swift */; };
-		F7FCDE93240C88BF0062E080 /* SSDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE90240C88BF0062E080 /* SSDPParser.swift */; };
-		F7FCDE94240C88BF0062E080 /* SSDPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE91240C88BF0062E080 /* SSDPManager.swift */; };
-		F7FCDE95240C88BF0062E080 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FCDE92240C88BF0062E080 /* Socket.swift */; };
+		F74CEFE924E3F5760072D720 /* DiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFD624E3F5750072D720 /* DiscoveryApp.swift */; };
+		F74CEFEA24E3F5760072D720 /* DiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFD624E3F5750072D720 /* DiscoveryApp.swift */; };
+		F74CEFEB24E3F5760072D720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFD724E3F5750072D720 /* ContentView.swift */; };
+		F74CEFEC24E3F5760072D720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFD724E3F5750072D720 /* ContentView.swift */; };
+		F74CEFED24E3F5760072D720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F74CEFD824E3F5760072D720 /* Assets.xcassets */; };
+		F74CEFEE24E3F5760072D720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F74CEFD824E3F5760072D720 /* Assets.xcassets */; };
+		F74CEFF824E3F5AA0072D720 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFF724E3F5AA0072D720 /* AppEnvironment.swift */; };
+		F74CEFF924E3F5AA0072D720 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFF724E3F5AA0072D720 /* AppEnvironment.swift */; };
+		F74CF00424E3F5C60072D720 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFC24E3F5C60072D720 /* Publisher+Extensions.swift */; };
+		F74CF00524E3F5C60072D720 /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFC24E3F5C60072D720 /* Publisher+Extensions.swift */; };
+		F74CF00624E3F5C60072D720 /* SSDPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFE24E3F5C60072D720 /* SSDPManager.swift */; };
+		F74CF00724E3F5C60072D720 /* SSDPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFE24E3F5C60072D720 /* SSDPManager.swift */; };
+		F74CF00824E3F5C60072D720 /* SSDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFF24E3F5C60072D720 /* SSDPParser.swift */; };
+		F74CF00924E3F5C60072D720 /* SSDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CEFFF24E3F5C60072D720 /* SSDPParser.swift */; };
+		F74CF00A24E3F5C60072D720 /* Socket+SSDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00024E3F5C60072D720 /* Socket+SSDP.swift */; };
+		F74CF00B24E3F5C60072D720 /* Socket+SSDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00024E3F5C60072D720 /* Socket+SSDP.swift */; };
+		F74CF00C24E3F5C60072D720 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00124E3F5C60072D720 /* Socket.swift */; };
+		F74CF00D24E3F5C60072D720 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00124E3F5C60072D720 /* Socket.swift */; };
+		F74CF00F24E3F69B0072D720 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00E24E3F69B0072D720 /* AppStore.swift */; };
+		F74CF01024E3F69B0072D720 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74CF00E24E3F69B0072D720 /* AppStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F728747A240DEBD80077A292 /* NSViewController+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Combine.swift"; sourceTree = "<group>"; };
-		F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSArrayController+Combine.swift"; sourceTree = "<group>"; };
-		F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Socket+SSDP.swift"; sourceTree = "<group>"; };
-		F7D5C874241406B600741CA3 /* NSButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSButton+Combine.swift"; sourceTree = "<group>"; };
-		F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
-		F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextView+Combine.swift"; sourceTree = "<group>"; };
-		F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Links.swift"; sourceTree = "<group>"; };
-		F7FCDE79240C86420062E080 /* Discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7FCDE7C240C86420062E080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F7FCDE7E240C86420062E080 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		F7FCDE80240C86440062E080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F7FCDE83240C86440062E080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F7FCDE85240C86440062E080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7FCDE86240C86440062E080 /* Discovery.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Discovery.entitlements; sourceTree = "<group>"; };
-		F7FCDE8C240C86D90062E080 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		F7FCDE8E240C880C0062E080 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		F7FCDE90240C88BF0062E080 /* SSDPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPParser.swift; sourceTree = "<group>"; };
-		F7FCDE91240C88BF0062E080 /* SSDPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPManager.swift; sourceTree = "<group>"; };
-		F7FCDE92240C88BF0062E080 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		F74CEFD624E3F5750072D720 /* DiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryApp.swift; sourceTree = "<group>"; };
+		F74CEFD724E3F5750072D720 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F74CEFD824E3F5760072D720 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F74CEFDD24E3F5760072D720 /* Discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F74CEFE024E3F5760072D720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F74CEFE524E3F5760072D720 /* Discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F74CEFE724E3F5760072D720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F74CEFE824E3F5760072D720 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		F74CEFF724E3F5AA0072D720 /* AppEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		F74CEFFC24E3F5C60072D720 /* Publisher+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
+		F74CEFFE24E3F5C60072D720 /* SSDPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPManager.swift; sourceTree = "<group>"; };
+		F74CEFFF24E3F5C60072D720 /* SSDPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPParser.swift; sourceTree = "<group>"; };
+		F74CF00024E3F5C60072D720 /* Socket+SSDP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Socket+SSDP.swift"; sourceTree = "<group>"; };
+		F74CF00124E3F5C60072D720 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		F74CF00E24E3F69B0072D720 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F7FCDE76240C86420062E080 /* Frameworks */ = {
+		F74CEFDA24E3F5760072D720 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F74CEFE224E3F5760072D720 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -58,99 +65,130 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F7287479240DEBC80077A292 /* Extensions */ = {
+		F74CEFD024E3F5750072D720 = {
 			isa = PBXGroup;
 			children = (
-				F728747A240DEBD80077A292 /* NSViewController+Combine.swift */,
-				F728747C240F2BBF0077A292 /* NSArrayController+Combine.swift */,
-				F7D5C874241406B600741CA3 /* NSButton+Combine.swift */,
-				F7D5C87824146BDB00741CA3 /* NSTextView+Combine.swift */,
-				F7D5C8762414277100741CA3 /* Publisher+Extensions.swift */,
-				F7D5C87A24146EC900741CA3 /* NSAttributedString+Links.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		F776273B240DEA89008580AA /* SSDP */ = {
-			isa = PBXGroup;
-			children = (
-				F7FCDE91240C88BF0062E080 /* SSDPManager.swift */,
-				F7FCDE90240C88BF0062E080 /* SSDPParser.swift */,
-				F7D5C8722413FD5600741CA3 /* Socket+SSDP.swift */,
-				F7FCDE92240C88BF0062E080 /* Socket.swift */,
-			);
-			path = SSDP;
-			sourceTree = "<group>";
-		};
-		F7FCDE70240C86420062E080 = {
-			isa = PBXGroup;
-			children = (
-				F7FCDE7B240C86420062E080 /* Discovery */,
-				F7FCDE7A240C86420062E080 /* Products */,
+				F74CEFD524E3F5750072D720 /* Shared */,
+				F74CEFDF24E3F5760072D720 /* iOS */,
+				F74CEFE624E3F5760072D720 /* macOS */,
+				F74CEFDE24E3F5760072D720 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F7FCDE7A240C86420062E080 /* Products */ = {
+		F74CEFD524E3F5750072D720 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				F7FCDE79240C86420062E080 /* Discovery.app */,
+				F74CEFD624E3F5750072D720 /* DiscoveryApp.swift */,
+				F74CF00E24E3F69B0072D720 /* AppStore.swift */,
+				F74CEFF724E3F5AA0072D720 /* AppEnvironment.swift */,
+				F74CEFD724E3F5750072D720 /* ContentView.swift */,
+				F74CEFFA24E3F5C60072D720 /* Extensions */,
+				F74CEFFD24E3F5C60072D720 /* SSDP */,
+				F74CEFD824E3F5760072D720 /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F74CEFDE24E3F5760072D720 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F74CEFDD24E3F5760072D720 /* Discovery.app */,
+				F74CEFE524E3F5760072D720 /* Discovery.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F7FCDE7B240C86420062E080 /* Discovery */ = {
+		F74CEFDF24E3F5760072D720 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F7FCDE7C240C86420062E080 /* AppDelegate.swift */,
-				F7FCDE8C240C86D90062E080 /* WindowController.swift */,
-				F7FCDE7E240C86420062E080 /* ListViewController.swift */,
-				F7FCDE8E240C880C0062E080 /* DetailViewController.swift */,
-				F776273B240DEA89008580AA /* SSDP */,
-				F7287479240DEBC80077A292 /* Extensions */,
-				F7FCDE80240C86440062E080 /* Assets.xcassets */,
-				F7FCDE82240C86440062E080 /* Main.storyboard */,
-				F7FCDE85240C86440062E080 /* Info.plist */,
-				F7FCDE86240C86440062E080 /* Discovery.entitlements */,
+				F74CEFE024E3F5760072D720 /* Info.plist */,
 			);
-			path = Discovery;
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		F74CEFE624E3F5760072D720 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				F74CEFE724E3F5760072D720 /* Info.plist */,
+				F74CEFE824E3F5760072D720 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		F74CEFFA24E3F5C60072D720 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F74CEFFC24E3F5C60072D720 /* Publisher+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F74CEFFD24E3F5C60072D720 /* SSDP */ = {
+			isa = PBXGroup;
+			children = (
+				F74CEFFE24E3F5C60072D720 /* SSDPManager.swift */,
+				F74CEFFF24E3F5C60072D720 /* SSDPParser.swift */,
+				F74CF00024E3F5C60072D720 /* Socket+SSDP.swift */,
+				F74CF00124E3F5C60072D720 /* Socket.swift */,
+			);
+			path = SSDP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F7FCDE78240C86420062E080 /* Discovery */ = {
+		F74CEFDC24E3F5760072D720 /* Discovery (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F7FCDE89240C86440062E080 /* Build configuration list for PBXNativeTarget "Discovery" */;
+			buildConfigurationList = F74CEFF124E3F5760072D720 /* Build configuration list for PBXNativeTarget "Discovery (iOS)" */;
 			buildPhases = (
-				F7FCDE75240C86420062E080 /* Sources */,
-				F7FCDE76240C86420062E080 /* Frameworks */,
-				F7FCDE77240C86420062E080 /* Resources */,
+				F74CEFD924E3F5760072D720 /* Sources */,
+				F74CEFDA24E3F5760072D720 /* Frameworks */,
+				F74CEFDB24E3F5760072D720 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Discovery;
-			productName = Discovery;
-			productReference = F7FCDE79240C86420062E080 /* Discovery.app */;
+			name = "Discovery (iOS)";
+			productName = "Discovery (iOS)";
+			productReference = F74CEFDD24E3F5760072D720 /* Discovery.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F74CEFE424E3F5760072D720 /* Discovery (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F74CEFF424E3F5760072D720 /* Build configuration list for PBXNativeTarget "Discovery (macOS)" */;
+			buildPhases = (
+				F74CEFE124E3F5760072D720 /* Sources */,
+				F74CEFE224E3F5760072D720 /* Frameworks */,
+				F74CEFE324E3F5760072D720 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Discovery (macOS)";
+			productName = "Discovery (macOS)";
+			productReference = F74CEFE524E3F5760072D720 /* Discovery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F7FCDE71240C86420062E080 /* Project object */ = {
+		F74CEFD124E3F5750072D720 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
-				ORGANIZATIONNAME = "Andrew Shepard";
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
 				TargetAttributes = {
-					F7FCDE78240C86420062E080 = {
-						CreatedOnToolsVersion = 11.4;
+					F74CEFDC24E3F5760072D720 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					F74CEFE424E3F5760072D720 = {
+						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
-			buildConfigurationList = F7FCDE74240C86420062E080 /* Build configuration list for PBXProject "Discovery" */;
+			buildConfigurationList = F74CEFD424E3F5750072D720 /* Build configuration list for PBXProject "Discovery" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -158,65 +196,73 @@
 				en,
 				Base,
 			);
-			mainGroup = F7FCDE70240C86420062E080;
-			productRefGroup = F7FCDE7A240C86420062E080 /* Products */;
+			mainGroup = F74CEFD024E3F5750072D720;
+			productRefGroup = F74CEFDE24E3F5760072D720 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F7FCDE78240C86420062E080 /* Discovery */,
+				F74CEFDC24E3F5760072D720 /* Discovery (iOS) */,
+				F74CEFE424E3F5760072D720 /* Discovery (macOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F7FCDE77240C86420062E080 /* Resources */ = {
+		F74CEFDB24E3F5760072D720 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7FCDE81240C86440062E080 /* Assets.xcassets in Resources */,
-				F7FCDE84240C86440062E080 /* Main.storyboard in Resources */,
+				F74CEFED24E3F5760072D720 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F74CEFE324E3F5760072D720 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F74CEFEE24E3F5760072D720 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F7FCDE75240C86420062E080 /* Sources */ = {
+		F74CEFD924E3F5760072D720 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7FCDE93240C88BF0062E080 /* SSDPParser.swift in Sources */,
-				F728747B240DEBD80077A292 /* NSViewController+Combine.swift in Sources */,
-				F7FCDE95240C88BF0062E080 /* Socket.swift in Sources */,
-				F7FCDE94240C88BF0062E080 /* SSDPManager.swift in Sources */,
-				F7D5C875241406B600741CA3 /* NSButton+Combine.swift in Sources */,
-				F7FCDE7F240C86420062E080 /* ListViewController.swift in Sources */,
-				F7FCDE8D240C86D90062E080 /* WindowController.swift in Sources */,
-				F7D5C87B24146EC900741CA3 /* NSAttributedString+Links.swift in Sources */,
-				F7FCDE7D240C86420062E080 /* AppDelegate.swift in Sources */,
-				F7D5C87924146BDB00741CA3 /* NSTextView+Combine.swift in Sources */,
-				F728747D240F2BBF0077A292 /* NSArrayController+Combine.swift in Sources */,
-				F7FCDE8F240C880C0062E080 /* DetailViewController.swift in Sources */,
-				F7D5C8772414277100741CA3 /* Publisher+Extensions.swift in Sources */,
-				F7D5C8732413FD5600741CA3 /* Socket+SSDP.swift in Sources */,
+				F74CEFF824E3F5AA0072D720 /* AppEnvironment.swift in Sources */,
+				F74CF00624E3F5C60072D720 /* SSDPManager.swift in Sources */,
+				F74CF00A24E3F5C60072D720 /* Socket+SSDP.swift in Sources */,
+				F74CF00F24E3F69B0072D720 /* AppStore.swift in Sources */,
+				F74CF00824E3F5C60072D720 /* SSDPParser.swift in Sources */,
+				F74CF00C24E3F5C60072D720 /* Socket.swift in Sources */,
+				F74CEFEB24E3F5760072D720 /* ContentView.swift in Sources */,
+				F74CEFE924E3F5760072D720 /* DiscoveryApp.swift in Sources */,
+				F74CF00424E3F5C60072D720 /* Publisher+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F74CEFE124E3F5760072D720 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F74CEFF924E3F5AA0072D720 /* AppEnvironment.swift in Sources */,
+				F74CF01024E3F69B0072D720 /* AppStore.swift in Sources */,
+				F74CF00724E3F5C60072D720 /* SSDPManager.swift in Sources */,
+				F74CF00B24E3F5C60072D720 /* Socket+SSDP.swift in Sources */,
+				F74CF00924E3F5C60072D720 /* SSDPParser.swift in Sources */,
+				F74CF00D24E3F5C60072D720 /* Socket.swift in Sources */,
+				F74CEFEC24E3F5760072D720 /* ContentView.swift in Sources */,
+				F74CEFEA24E3F5760072D720 /* DiscoveryApp.swift in Sources */,
+				F74CF00524E3F5C60072D720 /* Publisher+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		F7FCDE82240C86440062E080 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F7FCDE83240C86440062E080 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		F7FCDE87240C86440062E080 /* Debug */ = {
+		F74CEFEF24E3F5760072D720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -242,6 +288,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -266,17 +313,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		F7FCDE88240C86440062E080 /* Release */ = {
+		F74CEFF024E3F5760072D720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -302,6 +347,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -320,47 +366,96 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
-		F7FCDE8A240C86440062E080 /* Debug */ = {
+		F74CEFF224E3F5760072D720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Discovery/Discovery.entitlements;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Discovery;
+				PRODUCT_NAME = Discovery;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F74CEFF324E3F5760072D720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Discovery;
+				PRODUCT_NAME = Discovery;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F74CEFF524E3F5760072D720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Discovery/Info.plist;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Discovery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Discovery;
+				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		F7FCDE8B240C86440062E080 /* Release */ = {
+		F74CEFF624E3F5760072D720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Discovery/Discovery.entitlements;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Discovery/Info.plist;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.Discovery;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Discovery;
+				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -368,25 +463,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F7FCDE74240C86420062E080 /* Build configuration list for PBXProject "Discovery" */ = {
+		F74CEFD424E3F5750072D720 /* Build configuration list for PBXProject "Discovery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F7FCDE87240C86440062E080 /* Debug */,
-				F7FCDE88240C86440062E080 /* Release */,
+				F74CEFEF24E3F5760072D720 /* Debug */,
+				F74CEFF024E3F5760072D720 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F7FCDE89240C86440062E080 /* Build configuration list for PBXNativeTarget "Discovery" */ = {
+		F74CEFF124E3F5760072D720 /* Build configuration list for PBXNativeTarget "Discovery (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F7FCDE8A240C86440062E080 /* Debug */,
-				F7FCDE8B240C86440062E080 /* Release */,
+				F74CEFF224E3F5760072D720 /* Debug */,
+				F74CEFF324E3F5760072D720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F74CEFF424E3F5760072D720 /* Build configuration list for PBXNativeTarget "Discovery (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F74CEFF524E3F5760072D720 /* Debug */,
+				F74CEFF624E3F5760072D720 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F7FCDE71240C86420062E080 /* Project object */;
+	rootObject = F74CEFD124E3F5750072D720 /* Project object */;
 }

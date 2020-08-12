@@ -208,7 +208,7 @@ struct SocketConfiguration {
         addr.sin_family = SocketAddressConfig.ipv4.rawValue
         addr.sin_port = htons(UInt16(port))
         
-        var addressPtr = address.toUnsafeMutablePointer()
+        let addressPtr = address.toUnsafeMutablePointer()
         defer { free(addressPtr) }
         
         Darwin.inet_pton(2, addressPtr, &addr.sin_addr)

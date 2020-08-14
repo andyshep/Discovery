@@ -31,7 +31,7 @@ struct SSDPService {
         
         guard
             let locationURL = URL(string: location),
-            let expiry = SSDPService.expiryDate(fromCacheControl: cacheControlString)
+            let expiry = cacheControlString.expiryDate
         else { return nil }
             
         self.location = locationURL
@@ -39,42 +39,40 @@ struct SSDPService {
         self.uniqueServiceName = uniqueServiceName
         self.cacheControl = expiry
     }
-    
-    private static func expiryDate(fromCacheControl string: String) -> Date? {
-        guard let last = string.split(separator: "=").last else { return nil }
-        guard let value = Double(String(last)) else { return nil }
-        
-        return Date().advanced(by: value)
-    }
 }
 
-final class SSDPServiceParser {
-
-    static func parse(_ data: Data) -> SSDPService? {
+extension Data {
+    var service: SSDPService? {
         guard
-            let discovery = String(data: data, encoding: .utf8),
-            let ssdpService = SSDPService(dictionary: parseIntoDictionary(discovery))
+            let discovery = String(data: self, encoding: .utf8),
+            let ssdpService = SSDPService(dictionary: discovery.serviceInfo)
         else { return nil }
         
         return ssdpService
     }
+}
+
+private extension String {
+    var serviceInfo: [String: String] {
+        return split(separator: "\r\n")
+            .reduce(into: [String: String]()) { (results, element) in
+                let keyValuePair = element.split(separator: ":", maxSplits: 1)
+                
+                guard keyValuePair.count == 2 else { return }
+
+                let key = String(keyValuePair[0]).uppercased()
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                let value = String(keyValuePair[1])
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                results[key] = value
+            }
+    }
     
-    // MARK: Private
-
-    private static func parseIntoDictionary(_ response: String) -> [String: String] {
-        var elements: [String: String] = [:]
-        for element in response.split(separator: "\r\n") {
-            let keyValuePair = element.split(separator: ":", maxSplits: 1)
-            guard keyValuePair.count == 2 else { continue }
-
-            let key = String(keyValuePair[0]).uppercased()
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-            let value = String(keyValuePair[1])
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-
-            elements[key] = value
-        }
-
-        return elements
+    var expiryDate: Date? {
+        guard let last = split(separator: "=").last else { return nil }
+        guard let value = Double(String(last)) else { return nil }
+        
+        return Date().advanced(by: value)
     }
 }

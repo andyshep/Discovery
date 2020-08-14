@@ -25,7 +25,7 @@ extension AppEnvironment {
             .tryMap { result -> [SSDPServiceWrapper] in
                 switch result {
                 case .success(let data):
-                    guard let service = SSDPServiceParser.parse(data) else {
+                    guard let service = data.service else {
                         print("could not create service from \(data.count) bytes of data")
                         return results
                     }

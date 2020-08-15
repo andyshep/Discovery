@@ -17,34 +17,32 @@ struct AppEnvironment {
 }
 
 extension AppEnvironment {
+    
     /// Returns a publisher to emits a collection of discovered SSDP services
     func discoveredServicesPublisher() -> AnyPublisher<[SSDPServiceWrapper], Error> {
-        var results: [SSDPServiceWrapper] = []
-        
         return ssdpManager.listenerSocketSubject
-            .tryMap { result -> [SSDPServiceWrapper] in
+            .tryCompactMap { result -> SSDPServiceWrapper? in
                 switch result {
                 case .success(let data):
                     guard let service = data.service else {
                         print("could not create service from \(data.count) bytes of data")
-                        return results
+                        return nil
                     }
                     
                     guard let payload = String(data: data, encoding: .utf8) else {
                         print("could not decode utf8 data from \(data.count) bytes of data")
-                        return results
+                        return nil
                     }
                     
-                    let wrapper = SSDPServiceWrapper(service: service, payload: payload)
-                    if !results.contains(where: { $0 == wrapper }) {
-                        results.append(wrapper)
-                    }
-                    
-                    return results
+                    return SSDPServiceWrapper(service: service, payload: payload)
                 case .failure(let error):
                     throw error
                 }
             }
+            .scan([SSDPServiceWrapper](), { (results, service) -> [SSDPServiceWrapper] in
+                guard !results.contains(where: { $0 == service }) else { return results }
+                return results + [service]
+            })
             .eraseToAnyPublisher()
     }
 }

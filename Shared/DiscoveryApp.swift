@@ -10,32 +10,13 @@ import SwiftUI
 @main
 struct DiscoveryApp: App {
     
-    private let store = AppStore(
+    @StateObject private var store = AppStore(
         initial: .init(),
         reducer: appReducer,
         environment: AppEnvironment()
     )
 
     var body: some Scene {
-        WindowGroup {
-            NavigationView {
-                ServiceListContainer()
-                    .environmentObject(store)
-            }
-            .toolbar(items: {
-                ToolbarItem {
-                    Button {
-                        store.send(.refresh)
-                    } label: {
-                        Label("Reload", systemImage: "arrow.counterclockwise")
-                            .labelStyle(IconOnlyLabelStyle())
-                    }
-
-                }
-            })
-            .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .presentedWindowToolbarStyle(UnifiedCompactWindowToolbarStyle())
-            .presentedWindowStyle(HiddenTitleBarWindowStyle())
-        }
+        ColumnAppScene(store: store)
     }
 }

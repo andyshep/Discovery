@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 struct AppState {
     var services: [SSDPServiceWrapper] = []
@@ -17,7 +18,9 @@ struct AppState {
 enum AppAction {
     case discoverServices
     case setServices(services: [SSDPServiceWrapper])
+    case select(service: SSDPServiceWrapper?)
     case refresh
+    case share
 }
 
 typealias Reducer<State, Action, Environment> =
@@ -53,6 +56,18 @@ final class Store<State, Action, Environment>: ObservableObject {
     }
 }
 
+extension Store {
+    func binding<Value>(
+        for keyPath: KeyPath<State, Value>,
+        transform: @escaping (Value) -> Action
+    ) -> Binding<Value> {
+        Binding<Value>(
+            get: { self.state[keyPath: keyPath] },
+            set: { self.send(transform($0)) }
+        )
+    }
+}
+
 func appReducer(
     state: inout AppState,
     action: AppAction,
@@ -61,7 +76,8 @@ func appReducer(
     switch action {
     case .discoverServices:
         return environment.discoveredServicesPublisher()
-            .throttle(for: 2.0, scheduler: DispatchQueue.main, latest: true)
+//            .throttle(for: 1.0, scheduler: DispatchQueue.main, latest: true)
+//            .mapError { _ in AppAction.showError(error: $0).eras }
             .replaceError(with: [])
             .map { AppAction.setServices(services: $0) }
             .eraseToAnyPublisher()
@@ -70,9 +86,16 @@ func appReducer(
         
     case .refresh:
         state.services = []
+        state.selected = nil
         return Just(())
             .map { AppAction.discoverServices }
             .eraseToAnyPublisher()
+        
+    case .select(let service):
+        state.selected = service
+        
+    case .share:
+        print("share")
     }
     
     return nil

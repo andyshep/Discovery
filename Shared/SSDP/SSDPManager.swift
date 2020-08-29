@@ -11,12 +11,12 @@ import Combine
 
 final class SSDPManager {
     
-    private enum SSDPManagerError: Error {
+    private enum Error: Swift.Error {
         case retainFailed
     }
     
     /// Emits with new SSDP data received from the socket
-    var listenerSocketSubject: AnyPublisher<Result<Data, Error>, Never> {
+    var listenerSocketSubject: AnyPublisher<Result<Data, Swift.Error>, Never> {
         return _listenerSocketSubject
             .handleEvents(
                 receiveSubscription: { [unowned self] _ in
@@ -26,7 +26,7 @@ final class SSDPManager {
             .print()
             .eraseToAnyPublisher()
     }
-    private let _listenerSocketSubject = PassthroughSubject<Result<Data, Error>, Never>()
+    private let _listenerSocketSubject = PassthroughSubject<Result<Data, Swift.Error>, Never>()
     
     /// To be triggered when an SSDP broadcast should be sent
     var broadcastEventTrigger: AnySubscriber<Void, Never> {
@@ -45,7 +45,7 @@ final class SSDPManager {
         return { }
     }()
     
-    private var cancellables: [AnyCancellable] = []
+    private var cancellables: Set<AnyCancellable> = Set()
     
     private var broadcastSocket: Socket
     private var listenerSocket: Socket
@@ -54,12 +54,12 @@ final class SSDPManager {
     private let listenerQueue = DispatchQueue.init(label: "listening-queue")
     
     init?() {
-        guard let broadcast = Socket(domain: .inet, type: .dgram, protocol: .udp) else { return nil }
+        guard let broadcast = try? Socket(domain: .inet, type: .dgram, protocol: .udp) else { return nil }
         guard let _ = try? configureAsBroadcast(socket: broadcast) else { return nil }
         
         self.broadcastSocket = broadcast
         
-        guard let listener = Socket(domain: .inet, type: .dgram, protocol: .udp) else { return nil }
+        guard let listener = try? Socket(domain: .inet, type: .dgram, protocol: .udp) else { return nil }
         guard let _ = try? configureAsListener(socket: listener) else { return nil }
         
         self.listenerSocket = listener
@@ -77,10 +77,10 @@ final class SSDPManager {
         listenerSocket.forceClose()
     }
     
-    private func sendBroadcast() -> Future<Void, Error> {
-        return Future<Void, Error> { [weak self] promise in
+    private func sendBroadcast() -> Future<Void, Swift.Error> {
+        return Future<Void, Swift.Error> { [weak self] promise in
             guard let this = self else {
-                return promise(.failure(SSDPManagerError.retainFailed))
+                return promise(.failure(Error.retainFailed))
             }
             
             this.broadcastQueue.async {
@@ -103,8 +103,8 @@ final class SSDPManager {
 private func configureAsBroadcast(socket: Socket) throws {
     var broadcastEnable: UInt32 = 1
     try socket.setOption(
-        level: .socket,
         name: .broadcast,
+        level: .socket,
         value: &broadcastEnable,
         length: socklen_t(MemoryLayout<socklen_t>.size)
     )
@@ -113,8 +113,8 @@ private func configureAsBroadcast(socket: Socket) throws {
 private func configureAsListener(socket: Socket) throws {
     var reuseAddressEnable: UInt32 = 1
     try socket.setOption(
-        level: .socket,
         name: .reuseAddress,
+        level: .socket,
         value: &reuseAddressEnable,
         length: socklen_t(MemoryLayout<socklen_t>.size)
     )

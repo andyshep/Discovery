@@ -18,9 +18,9 @@ struct Socket {
         self.descriptor = descriptor
     }
     
-    init?(domain: SocketDomain, type: SocketType, protocol: SocketProtocol) {
+    init(domain: Domain, type: `Type`, protocol: `Protocol`) throws {
         let result = Darwin.socket(domain.rawValue, type.rawValue, `protocol`.rawValue)
-        guard result != -1 else { return nil }
+        guard result != -1 else { throw Error.couldNotOpen(code: result) }
         self.descriptor = result
     }
 }
@@ -29,15 +29,15 @@ extension Socket {
     
     // MARK: Public
     
-    func setOption(level: SocketOptionLevel, name: SocketOption, value: UnsafeRawPointer, length: socklen_t) throws {
+    func setOption(name: Option, level: Option.Level, value: UnsafeRawPointer, length: socklen_t) throws {
         guard Darwin.setsockopt(descriptor, level.rawValue, name.rawValue, value, length) == 0 else {
-            throw SocketError.setOptionFailed(code: errno)
+            throw Error.setOptionFailed(code: errno)
         }
     }
     
     func close() throws {
         guard Darwin.close(descriptor) == 0 else {
-            throw SocketError.closeFailed(code: errno)
+            throw Error.closeFailed(code: errno)
         }
     }
     
@@ -49,19 +49,19 @@ extension Socket {
     
     internal func bind(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
         guard Darwin.bind(descriptor, address, length) == 0 else {
-            throw SocketError.bindFailed(code: errno)
+            throw Error.bindFailed(code: errno)
         }
     }
     
     internal func connect(address: UnsafePointer<sockaddr>, length: socklen_t) throws {
         guard Darwin.connect(descriptor, address, length) != -1 else {
-            throw SocketError.connectFailed(code: errno)
+            throw Error.connectFailed(code: errno)
         }
     }
     
     internal func send(buffer: UnsafeBufferPointer<UInt8>, flags: Int32 = 0) throws {
         guard Darwin.send(descriptor, buffer.baseAddress, buffer.count, flags) != -1 else {
-            throw SocketError.sendFailed(code: errno)
+            throw Error.sendFailed(code: errno)
         }
     }
     
@@ -69,129 +69,134 @@ extension Socket {
         let bufferCount = Int(strlen(buffer.assumingMemoryBound(to: Int8.self)) + 1)
         let result = Darwin.sendto(descriptor, buffer, bufferCount, flags, destination, length)
         guard result >= 0 else {
-            throw SocketError.sendFailed(code: errno)
+            throw Error.sendFailed(code: errno)
         }
     }
 }
 
-enum SocketAddressConfig: UInt8 {
-    case ipv4
-    case ipv6
+extension Socket {
     
-    var rawValue: UInt8 {
-        switch self {
-        case .ipv4:
-            return UInt8(AF_INET)
-        case .ipv6:
-            return UInt8(AF_INET6)
+    internal enum Error: Swift.Error, CustomStringConvertible {
+        case couldNotOpen(code: Int32)
+        case connectFailed(code: Int32)
+        case bindFailed(code: Int32)
+        case sendFailed(code: Int32)
+        case closeFailed(code: Int32)
+        case receiveFailed(code: Int32)
+        case invalidAddress(code: Int32)
+        case setOptionFailed(code: Int32)
+        
+        var description: String {
+            switch self {
+            case .couldNotOpen(let code),
+                 .connectFailed(let code),
+                 .bindFailed(let code),
+                 .sendFailed(let code),
+                 .closeFailed(let code),
+                 .receiveFailed(let code),
+                 .invalidAddress(let code),
+                 .setOptionFailed(let code):
+                return String(utf8String: strerror(code)) ?? ""
+            }
         }
     }
-}
-
-enum SocketDomain: Int32 {
-    case local
-    case inet
-    case inet6
     
-    var rawValue: Int32 {
-        switch self {
-        case .local:
-            return PF_LOCAL
-        case .inet:
-            return PF_INET
-        case .inet6:
-            return PF_INET
+    enum `Protocol`: Int32 {
+        case tcp
+        case udp
+        
+        var rawValue: Int32 {
+            switch self {
+            case .tcp:
+                return IPPROTO_TCP
+            case .udp:
+                return IPPROTO_UDP
+            }
         }
     }
-}
-
-enum SocketType: Int32 {
-    case stream
-    case dgram
-    case raw
     
-    var rawValue: Int32 {
-        switch self {
-        case .stream:
-            return SOCK_STREAM
-        case .dgram:
-            return SOCK_DGRAM
-        case .raw:
-            return SOCK_RAW
+    enum AddressConfig: UInt8 {
+        case ipv4
+        case ipv6
+        
+        var rawValue: UInt8 {
+            switch self {
+            case .ipv4:
+                return UInt8(AF_INET)
+            case .ipv6:
+                return UInt8(AF_INET6)
+            }
         }
     }
-}
-
-enum SocketProtocol: Int32 {
-    case tcp
-    case udp
     
-    var rawValue: Int32 {
-        switch self {
-        case .tcp:
-            return IPPROTO_TCP
-        case .udp:
-            return IPPROTO_UDP
+    enum Domain: Int32 {
+        case local
+        case inet
+        case inet6
+        
+        var rawValue: Int32 {
+            switch self {
+            case .local:
+                return PF_LOCAL
+            case .inet:
+                return PF_INET
+            case .inet6:
+                return PF_INET
+            }
         }
     }
-}
-
-enum SocketOption: Int32 {
-    case broadcast
-    case debug
-    case reuseAddress
-    case addMembership
     
-    var rawValue: Int32 {
-        switch self {
-        case .broadcast:
-            return SO_BROADCAST
-        case .debug:
-            return SO_DEBUG
-        case .reuseAddress:
-            return SO_REUSEADDR
-        case .addMembership:
-            return IP_ADD_MEMBERSHIP
+    enum `Type`: Int32 {
+        case stream
+        case dgram
+        case raw
+        
+        var rawValue: Int32 {
+            switch self {
+            case .stream:
+                return SOCK_STREAM
+            case .dgram:
+                return SOCK_DGRAM
+            case .raw:
+                return SOCK_RAW
+            }
         }
     }
-}
-
-enum SocketOptionLevel: Int32 {
-    case socket
-    case local
-    case protocolIP
     
-    var rawValue: Int32 {
-        switch self {
-        case .socket:
-            return SOL_SOCKET
-        case .local:
-            return SOL_LOCAL
-        case .protocolIP:
-            return IPPROTO_IP
+    enum Option: Int32 {
+        case broadcast
+        case debug
+        case reuseAddress
+        case addMembership
+        
+        var rawValue: Int32 {
+            switch self {
+            case .broadcast:
+                return SO_BROADCAST
+            case .debug:
+                return SO_DEBUG
+            case .reuseAddress:
+                return SO_REUSEADDR
+            case .addMembership:
+                return IP_ADD_MEMBERSHIP
+            }
         }
-    }
-}
-
-enum SocketError: Error, CustomStringConvertible {
-    case connectFailed(code: Int32)
-    case bindFailed(code: Int32)
-    case sendFailed(code: Int32)
-    case closeFailed(code: Int32)
-    case receiveFailed(code: Int32)
-    case invalidAddress(code: Int32)
-    case setOptionFailed(code: Int32)
-    
-    var description: String {
-        switch self {
-        case .connectFailed(let code),
-             .bindFailed(let code),
-             .sendFailed(let code),
-             .closeFailed(let code),
-             .receiveFailed(let code),
-             .invalidAddress(let code),
-             .setOptionFailed(let code):
-            return String(utf8String: strerror(code)) ?? ""
+        
+        enum Level: Int32 {
+            case socket
+            case local
+            case protocolIP
+            
+            var rawValue: Int32 {
+                switch self {
+                case .socket:
+                    return SOL_SOCKET
+                case .local:
+                    return SOL_LOCAL
+                case .protocolIP:
+                    return IPPROTO_IP
+                }
+            }
         }
     }
 }
@@ -205,7 +210,7 @@ struct SocketConfiguration {
     
     init?(address: String, port: Int) {
         var addr = sockaddr_in()
-        addr.sin_family = SocketAddressConfig.ipv4.rawValue
+        addr.sin_family = Socket.AddressConfig.ipv4.rawValue
         addr.sin_port = htons(UInt16(port))
         
         let addressPtr = address.toUnsafeMutablePointer()
@@ -225,9 +230,7 @@ struct SocketConfiguration {
 
 internal extension String {
     func toUnsafePointer() -> UnsafePointer<UInt8>? {
-        guard let data = data(using: .utf8) else {
-            return nil
-        }
+        guard let data = data(using: .utf8) else { return nil }
 
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count)
         let stream = OutputStream(toBuffer: buffer, capacity: data.count)

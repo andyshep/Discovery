@@ -36,7 +36,7 @@ extension Socket {
     
     func receive(address: String = SSDP.address,
                  port: Int = SSDP.port,
-                 dataReceived callback: (Result<Data, Error>) -> Void) {
+                 dataReceived callback: (Result<Data, Swift.Error>) -> Void) {
         var config = SocketConfiguration.makeReceive(
             address: address,
             port: port
@@ -57,8 +57,8 @@ extension Socket {
         
         do {
             try setOption(
-                level: .protocolIP,
                 name: .addMembership,
+                level: .protocolIP,
                 value: &mreq,
                 length: socklen_t(MemoryLayout<ip_mreq>.size)
             )
@@ -79,7 +79,7 @@ extension Socket {
             
             // try to receive data from socket
             guard Darwin.recvfrom(descriptor, bufferPtr, count, 0, config.addressPtr, &addrlen) > 0 else {
-                return callback(.failure(SocketError.receiveFailed(code: errno)))
+                return callback(.failure(Error.receiveFailed(code: errno)))
             }
             
             // convert buffer into data
@@ -92,7 +92,7 @@ extension Socket {
 extension SocketConfiguration {
     static func makeBroadcast(address: String = SSDP.address, port: Int = SSDP.port) -> SocketConfiguration {
         var addr = sockaddr_in()
-        addr.sin_family = SocketAddressConfig.ipv4.rawValue
+        addr.sin_family = Socket.AddressConfig.ipv4.rawValue
         addr.sin_port = htons(UInt16(port))
         
         Darwin.inet_pton(2, address.toUnsafeMutablePointer(), &addr.sin_addr)
@@ -102,7 +102,7 @@ extension SocketConfiguration {
     
     static func makeReceive(address: String = SSDP.address, port: Int = SSDP.port) -> SocketConfiguration {
         var addr = sockaddr_in()
-        addr.sin_family = SocketAddressConfig.ipv4.rawValue
+        addr.sin_family = Socket.AddressConfig.ipv4.rawValue
         addr.sin_port = htons(UInt16(port))
         addr.sin_addr.s_addr = htonl(INADDR_ANY)
         
